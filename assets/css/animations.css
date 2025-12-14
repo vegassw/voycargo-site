@@ -1,0 +1,14 @@
+@keyframes wave {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+  }
+  
+  .plane-animation {
+    animation: fly 8s linear infinite;
+  }
+  
+  @keyframes fly {
+    0% { transform: translateX(-100px); }
+    100% { transform: translateX(calc(100vw + 100px)); }
+  }
+  

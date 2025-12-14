@@ -1,0 +1,231 @@
+/* ===========================================
+   ESTILOS GLOBALES
+=========================================== */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: #f9fafb;
+    scroll-behavior: smooth;
+  }
+  
+  /* ===========================================
+     HEADER
+  =========================================== */
+  .header {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+  }
+  
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* ===== LOGO Y MARCA ===== */
+  .logo-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .logo {
+    height: 100px; /* 🔹 tamaño óptimo del logo */
+    width: auto;
+    object-fit: contain;
+  }
+  
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #2E3C46;
+    line-height: 1;
+  }
+  
+  .brand-name {
+    line-height: 1.2;
+  }
+  
+  .flags {
+    font-size: 1.6rem;
+    margin-left: 6px;
+  }
+  
+  /* ===== MENÚ DESKTOP ===== */
+  .nav-menu {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  
+  .nav-menu a {
+    color: #2E3C46;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-menu a:hover {
+    color: #004AAD;
+  }
+  
+  .cta {
+    background: #E63946;
+    color: #fff !important;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  
+  .cta:hover {
+    background: #c92f3b;
+  }
+  
+  /* ===== BOTÓN HAMBURGUESA ===== */
+  .menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #2E3C46;
+    transition: transform 0.3s ease;
+    z-index: 10000;
+  }
+  
+  /* ===== MENÚ MÓVIL ===== */
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    border-top: 1px solid #eee;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+  }
+  
+  .mobile-menu a {
+    display: block;
+    margin: 12px 0;
+    color: #2E3C46;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .mobile-menu a:hover {
+    color: #004AAD;
+  }
+  
+  .mobile-menu .cta {
+    margin-top: 8px;
+  }
+  
+  /* ===== EFECTO DE DESPLEGADO ===== */
+  .mobile-menu.show {
+    display: flex;
+    animation: slideDown 0.3s ease-in-out;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .nav-menu {
+      display: none;
+    }
+  
+    .menu-btn {
+      display: block;
+    }
+  
+    .logo {
+      height: 80px; /* 🔹 más pequeño en móviles */
+    }
+  
+    .brand {
+      font-size: 1.5rem;
+    }
+  
+    .flags {
+      font-size: 1.3rem;
+    }
+  }
+  
+  /* ===========================================
+     HERO SECTION
+  =========================================== */
+  .hero-bg {
+    background: linear-gradient(135deg, rgba(0, 74, 173, 0.9), rgba(230, 57, 70, 0.8)),
+                url('../img/banner.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .hero-bg h1, 
+  .hero-bg h2, 
+  .hero-bg p {
+    color: #fff;
+  }
+  
+  .flag-animation {
+    animation: wave 2s ease-in-out infinite;
+  }
+  
+  @keyframes wave {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+  
+  /* ===========================================
+     UTILS / AJUSTES EXTRA
+  =========================================== */
+  
+  /* Corrige superposición del menú móvil */
+  body.menu-open {
+    overflow: hidden;
+  }
+  
+  /* Suaviza la animación del header en scroll */
+  .header.scrolled {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  }
+  

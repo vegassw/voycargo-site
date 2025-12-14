@@ -1,0 +1,171 @@
+<!-- COTIZACIÓN -->
+<section id="cotizacion" class="py-20 bg-blue-600">
+    <div class="container mx-auto px-4">
+      <h3 class="text-4xl font-bold text-center text-white mb-16">Cotización Rápida</h3>
+  
+      <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl p-8">
+        <form id="quoteForm" onsubmit="getQuote(event)" class="grid md:grid-cols-2 gap-6">
+  
+          <!-- País de origen -->
+          <div>
+            <label class="block text-gray-700 font-medium mb-2">País de Origen</label>
+            <select id="origin"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+              <option>Chile</option>
+              <option>Venezuela</option>
+            </select>
+          </div>
+  
+          <!-- País de destino -->
+          <div>
+            <label class="block text-gray-700 font-medium mb-2">País de Destino</label>
+            <select id="destination"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+              <option>Venezuela</option>
+              <option>Chile</option>
+            </select>
+          </div>
+  
+          <!-- Peso -->
+          <div>
+            <label class="block text-gray-700 font-medium mb-2">Peso (kg)</label>
+            <input id="weight" type="number" placeholder="Ej: 5"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+          </div>
+  
+          <!-- Tipo de servicio -->
+          <div>
+            <label class="block text-gray-700 font-medium mb-2">Tipo de Servicio</label>
+            <select id="serviceType"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+              <option value="aereo">Aéreo</option>
+              <option value="maritimo">Marítimo</option>
+              <option value="maritimo_express">Marítimo Express</option>
+            </select>
+          </div>
+  
+          <!-- Tipo de carga -->
+          <div class="md:col-span-2">
+            <label class="block text-gray-700 font-medium mb-2">Tipo de Carga</label>
+            <select id="cargoType"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+              <option value="paquete">Paquete</option>
+              <option value="documentos">Documentos</option>
+              <option value="medicamentos">Medicamentos</option>
+              <option value="electronicos">Electrónicos</option>
+              <option value="celular">Celular</option>
+              <option value="caja_s">Caja S (30x30x30)</option>
+              <option value="caja_m">Caja M (40x30x30)</option>
+              <option value="caja_l">Caja L (50x30x30)</option>
+              <option value="caja_xl">Caja XL (60x40x40)</option>
+            </select>
+          </div>
+  
+          <!-- Botón de cotización -->
+          <div class="md:col-span-2 text-center">
+            <button type="submit"
+              class="bg-red-500 text-white px-12 py-4 rounded-lg text-lg font-semibold hover:bg-red-600 transition-colors">
+              Obtener Cotización
+            </button>
+          </div>
+        </form>
+  
+        <!-- Resultado -->
+        <div id="quoteResult"
+          class="hidden mt-8 p-6 bg-green-50 border border-green-200 rounded-lg transition-all duration-300 ease-in-out">
+          <h4 class="text-xl font-semibold text-green-800 mb-4 flex items-center justify-center gap-2">
+            📦 Pre-Cotización Lista
+          </h4>
+  
+          <!-- Resultado formateado -->
+          <div id="quoteText"
+            class="text-green-800 bg-white p-4 rounded-lg border border-green-100 font-medium leading-relaxed whitespace-pre-line text-center md:text-left shadow-sm">
+          </div>
+  
+          <div class="mt-6 text-center">
+            <button onclick="contactWhatsApp()"
+              class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors">
+              Enviar por WhatsApp
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- SCRIPT DE CÁLCULO -->
+  <script>
+    function getQuote(e) {
+      e.preventDefault();
+  
+      const origin = document.getElementById("origin").value;
+      const destination = document.getElementById("destination").value;
+      const weight = parseFloat(document.getElementById("weight").value);
+      const service = document.getElementById("serviceType").value;
+      const cargo = document.getElementById("cargoType").value;
+  
+      let price = 0;
+      let estimate = "";
+  
+      // === CÁLCULOS SEGÚN SERVICIO ===
+      if (service === "aereo") {
+        if (weight <= 9.9) price = 12990;
+        else if (weight <= 24.9) price = 11490;
+        else price = 9990;
+  
+        if (cargo === "electronicos") price = 12990;
+        if (cargo === "celular") price = 15990;
+        if (cargo === "documentos") price = 11990;
+        if (cargo === "medicamentos") price = 9990;
+  
+        estimate = "✈️ Entrega estimada: 3 a 5 días hábiles.";
+      }
+  
+      if (service === "maritimo") {
+        if (cargo === "caja_s") price = 45900;
+        if (cargo === "caja_m") price = 56900;
+        if (cargo === "caja_l") price = 66900;
+        if (cargo === "caja_xl") price = 130900;
+  
+        estimate = "🚢 Entrega estimada: 25 a 35 días hábiles.";
+      }
+  
+      if (service === "maritimo_express") {
+        if (cargo === "caja_s") price = 54990;
+        if (cargo === "caja_m") price = 79990;
+        if (cargo === "caja_l") price = 139990;
+        if (cargo === "caja_xl") price = 179990;
+  
+        estimate = "🚢 Entrega estimada: 25 a 30 días hábiles.";
+      }
+  
+      // === VALIDACIONES ===
+      if (!weight || weight <= 0) {
+        alert("Por favor ingresa un peso válido.");
+        return;
+      }
+  
+      // === FORMATO VISUAL CON HTML ===
+      const formattedText = `
+        <strong>Origen:</strong> ${origin}<br>
+        <strong>Destino:</strong> ${destination}<br>
+        <strong>Servicio:</strong> ${service.replace("_", " ").toUpperCase()}<br>
+        <strong>Tipo de carga:</strong> ${cargo.replace("_", " ").toUpperCase()}<br>
+        <strong>Peso:</strong> ${weight} kg<br>
+        <strong>Precio estimado:</strong> $${price.toLocaleString("es-CL")} CLP<br>
+        <em>${estimate}</em>
+      `;
+  
+      document.getElementById("quoteText").innerHTML = formattedText;
+      document.getElementById("quoteResult").classList.remove("hidden");
+    }
+  
+    // === ENVIAR POR WHATSAPP ===
+    function contactWhatsApp() {
+      const msg = document.getElementById("quoteText").innerText;
+      const phoneNumber = "56948783375"; // WhatsApp de VoyCargo
+      const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent("Hola 👋, quisiera confirmar la siguiente cotización:\n\n" + msg)}`;
+      window.open(url, "_blank");
+    }
+  </script>
+  
