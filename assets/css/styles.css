@@ -212,6 +212,18 @@ body {
   text-align: center;
 }
 
+/* Evita que el hero quedgit ade oculto por el header fijo */
+#hero {
+  padding-top: 140px; /* 🔹 Ajusta según la altura real del header */
+}
+
+@media (max-width: 768px) {
+  #hero {
+    padding-top: 110px; /* 🔹 Menos espacio en móviles */
+  }
+}
+
+
 .hero-bg h1, 
 .hero-bg h2, 
 .hero-bg p {
