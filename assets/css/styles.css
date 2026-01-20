@@ -279,3 +279,32 @@ body.menu-open {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
 }
+
+
+#precios strong {
+  color: #004AAD;
+}
+
+#precios li {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+#precios li:hover {
+  transform: translateX(4px);
+  color: #E63946;
+}
+
+/* ======== Sección precios - centrado flexible ======== */
+#preciosContainer .grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* centra horizontalmente */
+  gap: 1.5rem;
+}
+
+#preciosContainer .tarjeta-precio {
+  flex: 1 1 320px; /* ancho adaptable */
+  max-width: 400px;
+}
+
+

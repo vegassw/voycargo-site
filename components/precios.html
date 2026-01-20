@@ -1,0 +1,31 @@
+<section id="precios" class="bg-gray-50 py-20">
+    <div class="max-w-6xl mx-auto text-center px-6">
+      <h2 class="text-4xl font-extrabold text-gray-900 mb-4">
+        Tarifas desde <span id="region-nombre">la Región Metropolitana</span>
+      </h2>
+      <p class="text-gray-600 mb-10">
+        Precios actualizados para envíos — transporte aéreo, marítimo y marítimo express.
+      </p>
+  
+      <!-- Selector de región -->
+      <div class="flex justify-center mb-10">
+        <select id="region-select"
+          class="px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+          <option value="metropolitana" selected>Región Metropolitana</option>
+          <option value="concepcion">Región de Concepción</option>
+        </select>
+      </div>
+  
+      <!-- Contenedor de precios -->
+      <div id="tarifas-container" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+  
+      <!-- Combos -->
+      <div id="combos-container" class="mt-16 text-left bg-white shadow-lg rounded-2xl p-8 max-w-4xl mx-auto">
+        <h3 class="text-2xl font-bold text-blue-700 mb-6 flex items-center">
+          📦 Combos de Cajas
+        </h3>
+        <ul id="lista-combos" class="space-y-3 text-gray-700 text-lg"></ul>
+      </div>
+    </div>
+  </section>
+  

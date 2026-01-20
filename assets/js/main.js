@@ -19,3 +19,16 @@ document.querySelectorAll(".include").forEach(el => {
     }
   });
   
+
+  // Cuando termine de cargar el componente precios, inicializamos el script
+document.addEventListener("DOMContentLoaded", () => {
+  const preciosContainer = document.querySelector('#precios-container');
+  if (preciosContainer) {
+    // Esperar un poco para asegurar que el HTML esté listo
+    setTimeout(() => {
+      if (typeof initPrecios === 'function') {
+        initPrecios();
+      }
+    }, 300);
+  }
+});
