@@ -3,37 +3,483 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VoyCargo - Conectamos Chile y Venezuela</title>
-
-  <!-- Tailwind (solo para desarrollo) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Fuente -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Estilos -->
+  <title>VoyCargo - Envíos Chile y Venezuela | Aéreo y Marítimo</title>
+  <meta name="description" content="Envíos seguros y confiables entre Chile y Venezuela. Transporte aéreo y marítimo, puerta a puerta. Cotiza gratis por WhatsApp.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
   <link rel="stylesheet" href="assets/css/styles.css">
-  <link rel="stylesheet" href="assets/css/animations.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/img/logo2.png">
 </head>
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-container">
+      <a href="#" class="logo-link">
+        <img src="assets/img/logo2.png" alt="VoyCargo" class="logo-img">
+        <span class="logo-text">VoyCargo</span>
+      </a>
+      
+      <nav class="nav-desktop" id="navDesktop">
+        <a href="#servicios">Servicios</a>
+        <a href="#tarifas">Tarifas</a>
+        <a href="#beneficios">Por qué elegirnos</a>
+        <a href="#cotizar" class="nav-cta">Cotizar Envío</a>
+      </nav>
+      
+      <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <nav class="nav-mobile" id="navMobile">
+      <a href="#servicios">Servicios</a>
+      <a href="#tarifas">Tarifas</a>
+      <a href="#beneficios">Por qué elegirnos</a>
+      <a href="#cotizar" class="nav-cta">Cotizar Envío</a>
+    </nav>
+  </header>
 
-<body class="bg-gray-50 font-[Poppins]">
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <img src="assets/img/Flag_of_Chile.svg" alt="Chile" class="flag-icon">
+        <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 17L17 7M17 7H7M17 7V17"/>
+        </svg>
+        <img src="assets/img/Flag_of_Venezuela.svg" alt="Venezuela" class="flag-icon">
+      </div>
+      
+      <h1 class="hero-title">
+        Conectamos <span class="highlight">Chile</span> y <span class="highlight">Venezuela</span>
+      </h1>
+      
+      <p class="hero-subtitle">
+        Envíos seguros, rápidos y confiables. Transporte aéreo y marítimo con seguimiento en tiempo real.
+      </p>
+      
+      <div class="hero-actions">
+        <a href="#cotizar" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          Cotizar Ahora
+        </a>
+        <a href="https://wa.me/56978419619" target="_blank" class="btn btn-whatsapp">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          WhatsApp Directo
+        </a>
+      </div>
+      
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number">5+</span>
+          <span class="stat-label">Años de experiencia</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-number">10K+</span>
+          <span class="stat-label">Envíos completados</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Seguro incluido</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- ESTRUCTURA MODULAR -->
-  <div id="header" class="include" data-file="components/header.html"></div>
-  <div id="hero" class="include" data-file="components/hero.html"></div>
-  <div id="servicios" class="include" data-file="components/servicios.html"></div>
-  <div id="rastreo" class="include" data-file="components/rastreo.html"></div>
-  <div id="beneficios" class="include" data-file="components/beneficios.html"></div>
-  <div id="testimonios" class="include" data-file="components/testimonios.html"></div>  
-  <div id="precios-container" class="include" data-file="components/precios.html"></div>
-  <div id="cotizacion" class="include" data-file="components/cotizacion.html"></div>
-  <div id="footer" class="include" data-file="components/footer.html"></div>
+  <!-- Services Section -->
+  <section class="services" id="servicios">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Nuestros Servicios</span>
+        <h2 class="section-title">Todo lo que necesitas para tus envíos</h2>
+      </div>
+      
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon service-icon-air">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 16v-2a4 4 0 0 0-4-4h-2l-3.5-5H8l1.5 5H6L4.5 8H2l1 4-1 4h2.5L6 14h3.5L8 19h3.5l3.5-5h2a4 4 0 0 0 4-4v-2"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Envíos Aéreos Express</h3>
+          <p class="service-desc">Entrega rápida en 3-5 días hábiles. Ideal para documentos, medicinas y paquetes urgentes.</p>
+          <span class="service-time">3-5 días</span>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-icon service-icon-sea">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 20a6 6 0 0 1 6-6h8a6 6 0 0 1 6 6"/>
+              <path d="M12 14V4"/>
+              <path d="M12 4l4 4"/>
+              <path d="M12 4L8 8"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Cargas Marítimas</h3>
+          <p class="service-desc">Opción económica para envíos grandes. Perfecto para mudanzas y cargas voluminosas.</p>
+          <span class="service-time">15-25 días</span>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-icon service-icon-express">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Marítimo Express</h3>
+          <p class="service-desc">Combina el precio del marítimo con tiempos más cortos. Balance perfecto precio-tiempo.</p>
+          <span class="service-time">25-30 días</span>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-icon service-icon-pickup">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Retiro a Domicilio</h3>
+          <p class="service-desc">Recogemos tu envío directamente en tu hogar. Sin salir de casa, sin complicaciones.</p>
+          <span class="service-time">Servicio incluido</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- SCRIPTS GLOBALES -->
+  <!-- Pricing Section -->
+  <section class="pricing" id="tarifas">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Tarifas Transparentes</span>
+        <h2 class="section-title">Precios claros, sin sorpresas</h2>
+      </div>
+      
+      <!-- Region Selector -->
+      <div class="region-selector">
+        <button class="region-btn active" data-region="metropolitana">Región Metropolitana</button>
+        <button class="region-btn" data-region="concepcion">Región de Concepción</button>
+      </div>
+      
+      <!-- Pricing Cards -->
+      <div class="pricing-grid" id="pricingGrid">
+        <!-- Cards will be rendered by JS -->
+      </div>
+      
+      <!-- Combos -->
+      <div class="combos-section" id="combosSection">
+        <h3 class="combos-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+          </svg>
+          Combos de Cajas - Ahorra más
+        </h3>
+        <ul class="combos-list" id="combosList">
+          <!-- Combos will be rendered by JS -->
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="benefits" id="beneficios">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Por qué elegirnos</span>
+        <h2 class="section-title">Tu confianza es nuestra prioridad</h2>
+      </div>
+      
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <h3>Envíos 100% Seguros</h3>
+          <p>Cobertura de seguro incluida en todos los envíos. Tu tranquilidad garantizada.</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+          </div>
+          <h3>Seguimiento en Tiempo Real</h3>
+          <p>Rastrea tu envío en cada etapa del proceso. Siempre informado.</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <h3>Atención Personalizada</h3>
+          <p>Soporte dedicado vía WhatsApp. Respondemos todas tus dudas al instante.</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <h3>Puerta a Puerta</h3>
+          <p>Recogemos en tu domicilio y entregamos en destino. Sin intermediarios.</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <line x1="12" y1="1" x2="12" y2="23"/>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <h3>Precios Competitivos</h3>
+          <p>Las mejores tarifas del mercado. Calidad premium a precio justo.</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <h3>Experiencia Comprobada</h3>
+          <p>Más de 5 años conectando familias entre Chile y Venezuela.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Section -->
+  <section class="quote-section" id="cotizar">
+    <div class="container">
+      <div class="quote-wrapper">
+        <div class="quote-info">
+          <span class="section-tag">Cotización Rápida</span>
+          <h2 class="section-title">Obtén tu presupuesto al instante</h2>
+          <p class="quote-desc">Completa el formulario y recibe tu cotización. Sin compromisos, totalmente gratis.</p>
+          
+          <div class="quote-contact">
+            <p>¿Prefieres hablar directamente?</p>
+            <a href="https://wa.me/56978419619" target="_blank" class="whatsapp-link">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              +56 9 7841 9619
+            </a>
+          </div>
+        </div>
+        
+        <div class="quote-form-wrapper">
+          <form class="quote-form" id="quoteForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="origin">Origen</label>
+                <select id="origin" required>
+                  <option value="Chile">Chile</option>
+                  <option value="Venezuela">Venezuela</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="destination">Destino</label>
+                <select id="destination" required>
+                  <option value="Venezuela">Venezuela</option>
+                  <option value="Chile">Chile</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="serviceType">Tipo de Servicio</label>
+                <select id="serviceType" required>
+                  <option value="aereo">Aéreo Express</option>
+                  <option value="maritimo">Marítimo</option>
+                  <option value="maritimo_express">Marítimo Express</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="weight">Peso (kg)</label>
+                <input type="number" id="weight" placeholder="Ej: 5" min="0.1" step="0.1" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="cargoType">Tipo de Carga</label>
+              <select id="cargoType" required>
+                <option value="paquete">Paquete General</option>
+                <option value="documentos">Documentos</option>
+                <option value="medicamentos">Medicamentos</option>
+                <option value="electronicos">Electrónicos</option>
+                <option value="celular">Celular</option>
+                <option value="caja_s">Caja S (30x30x30)</option>
+                <option value="caja_m">Caja M (40x30x30)</option>
+                <option value="caja_l">Caja L (50x30x30)</option>
+                <option value="caja_xl">Caja XL (60x40x40)</option>
+              </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-full">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 11 12 14 22 4"/>
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+              </svg>
+              Obtener Cotización
+            </button>
+          </form>
+          
+          <!-- Quote Result -->
+          <div class="quote-result hidden" id="quoteResult">
+            <h4>Tu Pre-Cotización</h4>
+            <div class="quote-details" id="quoteText"></div>
+            <button type="button" class="btn btn-whatsapp btn-full" onclick="sendToWhatsApp()">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Confirmar por WhatsApp
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials" id="testimonios">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Testimonios</span>
+        <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+      </div>
+      
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="testimonial-text">"Llegó todo en perfecto estado a Caracas. El seguimiento fue excelente y la atención increíble."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">MG</div>
+            <div class="author-info">
+              <span class="author-name">María González</span>
+              <span class="author-location">Caracas, Venezuela</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="testimonial-text">"Envío mis productos regularmente. VoyCargo siempre cumple con los tiempos prometidos."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">CM</div>
+            <div class="author-info">
+              <span class="author-name">Carlos Mendoza</span>
+              <span class="author-location">Santiago, Chile</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="testimonial-text">"Pude enviar medicinas a mi familia de forma segura y rápida. Muy agradecida con el servicio."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">AR</div>
+            <div class="author-info">
+              <span class="author-name">Ana Rodríguez</span>
+              <span class="author-location">Valencia, Venezuela</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="assets/img/logo2.png" alt="VoyCargo" class="footer-logo">
+          <p>Conectamos familias entre Chile y Venezuela desde hace más de 5 años.</p>
+          <div class="footer-flags">
+            <img src="assets/img/Flag_of_Chile.svg" alt="Chile" class="flag-icon">
+            <img src="assets/img/Flag_of_Venezuela.svg" alt="Venezuela" class="flag-icon">
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Enlaces</h4>
+          <a href="#servicios">Servicios</a>
+          <a href="#tarifas">Tarifas</a>
+          <a href="#beneficios">Por qué elegirnos</a>
+          <a href="#cotizar">Cotizar</a>
+        </div>
+        
+        <div class="footer-contact">
+          <h4>Contacto</h4>
+          <a href="https://wa.me/56978419619" target="_blank" class="contact-item">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            +56 9 7841 9619
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 VoyCargo. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/56978419619" target="_blank" class="whatsapp-float" aria-label="Contactar por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span class="whatsapp-tooltip">¿Necesitas ayuda?</span>
+  </a>
+
+  <!-- Scripts -->
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/rastreo.js"></script>
-  <script src="assets/js/cotiza.js"></script>
-  <script src="assets/js/menu.js"></script>
-  <script src="assets/js/precios.js"></script>
 </body>
 </html>
