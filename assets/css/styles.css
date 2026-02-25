@@ -231,7 +231,7 @@ a {
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-  padding: 120px 24px 80px;
+  padding: 140px 24px 80px;
   position: relative;
   overflow: hidden;
 }
