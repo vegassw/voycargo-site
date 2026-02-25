@@ -162,6 +162,41 @@
     </div>
   </section>
 
+  <!-- Tracking Section -->
+  <section class="tracking" id="rastreo">
+    <div class="container">
+      <div class="tracking-wrapper">
+        <div class="tracking-content">
+          <div class="tracking-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="M21 21l-4.35-4.35"/>
+              <path d="M11 8v6"/>
+              <path d="M8 11h6"/>
+            </svg>
+          </div>
+          <h2 class="tracking-title">Rastrea tu Envío</h2>
+          <p class="tracking-desc">Ingresa tu número de seguimiento para conocer el estado actual de tu paquete en tiempo real.</p>
+        </div>
+        <div class="tracking-form-wrapper">
+          <form class="tracking-form" id="trackingForm" onsubmit="trackPackage(event)">
+            <div class="tracking-input-group">
+              <input type="text" id="trackingNumber" placeholder="Ingresa tu código de rastreo" required>
+              <button type="submit" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"/>
+                  <path d="M21 21l-4.35-4.35"/>
+                </svg>
+                Rastrear
+              </button>
+            </div>
+          </form>
+          <p class="tracking-help">¿No tienes tu código? <a href="https://wa.me/56978419619" target="_blank">Contáctanos por WhatsApp</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Pricing Section - Premium Design -->
   <section class="pricing" id="tarifas">
     <div class="container">
