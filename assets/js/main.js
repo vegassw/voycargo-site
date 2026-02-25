@@ -355,48 +355,58 @@ function calculateQuote() {
   let price = 0;
   let estimate = '';
   
-  // Calculate price based on service and cargo type
+  // Calculate price based on service and cargo type (Santiago prices)
   if (service === 'aereo') {
-    if (weight <= 9.9) price = 14990;
-    else if (weight <= 24.9) price = 12990;
-    else price = 11990;
+    // Base price per kg
+    if (weight <= 10) price = 13990;
+    else if (weight <= 25) price = 11990;
+    else price = 10990;
     
-    // Multiply by weight for total
-    price = price * Math.ceil(weight);
+    // Multiply by weight for kg-based items
+    if (cargo === 'paquete' || cargo === 'electronicos') {
+      price = price * Math.ceil(weight);
+    }
     
-    if (cargo === 'electronicos') price = 18000;
-    if (cargo === 'celular') price = 18990;
+    // Special items fixed prices
+    if (cargo === 'celular') price = 15990;
     if (cargo === 'documentos') price = 12990;
     if (cargo === 'medicamentos') price = 12990;
+    if (cargo === 'tv') price = 11990 * Math.ceil(weight);
     
     estimate = '3 a 5 días hábiles';
   }
   
   if (service === 'maritimo') {
-    if (cargo === 'caja_s') price = 48965;
-    if (cargo === 'caja_m') price = 58500;
-    if (cargo === 'caja_l') price = 72000;
-    if (cargo === 'caja_xl') price = 153000;
+    if (cargo === 'caja_s') price = 44990;
+    if (cargo === 'caja_m') price = 54990;
+    if (cargo === 'caja_l') price = 67990;
+    if (cargo === 'caja_xl') price = 142990;
+    if (cargo === 'caja_xg') price = 162990;
+    if (cargo === 'caja_xxl') price = 225990;
     estimate = '15 a 25 días hábiles';
-  }
-  
-  if (service === 'maritimo_express') {
-    if (cargo === 'caja_s') price = 48965;
-    if (cargo === 'caja_m') price = 95000;
-    if (cargo === 'caja_l') price = 135000;
-    if (cargo === 'caja_xl') price = 195000;
-    estimate = '25 a 30 días hábiles';
   }
   
   // Format service name
   const serviceNames = {
     aereo: 'Aéreo Express',
-    maritimo: 'Marítimo',
-    maritimo_express: 'Marítimo Express'
+    maritimo: 'Marítimo Tradicional'
   };
   
   // Format cargo name
-  const cargoFormatted = cargo.replace(/_/g, ' ').toUpperCase();
+  const cargoNames = {
+    paquete: 'Paquete General',
+    documentos: 'Documentos',
+    medicamentos: 'Medicamentos',
+    electronicos: 'Electrónicos',
+    celular: 'Celular',
+    tv: 'Televisor',
+    caja_s: 'Caja S (30×30×30)',
+    caja_m: 'Caja M (40×30×30)',
+    caja_l: 'Caja L (50×30×30)',
+    caja_xl: 'Caja XL (60×40×40)',
+    caja_xg: 'Caja XG (70×40×40)',
+    caja_xxl: 'Caja XXL (60×50×50)'
+  };
   
   // Display result
   const quoteResult = document.getElementById('quoteResult');
@@ -406,7 +416,7 @@ function calculateQuote() {
     <p><span>Origen:</span> <strong>${origin}</strong></p>
     <p><span>Destino:</span> <strong>${destination}</strong></p>
     <p><span>Servicio:</span> <strong>${serviceNames[service]}</strong></p>
-    <p><span>Tipo de carga:</span> <strong>${cargoFormatted}</strong></p>
+    <p><span>Tipo de carga:</span> <strong>${cargoNames[cargo] || cargo}</strong></p>
     <p><span>Peso:</span> <strong>${weight} kg</strong></p>
     <p><span>Precio estimado:</span> <span class="price-highlight">$${price.toLocaleString('es-CL')} CLP</span></p>
     <p><span>Entrega estimada:</span> <strong>${estimate}</strong></p>
@@ -419,7 +429,7 @@ function calculateQuote() {
     origin,
     destination,
     service: serviceNames[service],
-    cargo: cargoFormatted,
+    cargo: cargoNames[cargo] || cargo,
     weight,
     price,
     estimate
