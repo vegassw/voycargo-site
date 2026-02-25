@@ -322,18 +322,21 @@ function updateCargoOptions(service) {
   
   if (service === 'aereo') {
     options = `
-      <option value="paquete">Paquete General</option>
-      <option value="documentos">Documentos</option>
-      <option value="medicamentos">Medicamentos</option>
-      <option value="electronicos">Electrónicos</option>
+      <option value="paquete">Paquete General (por kg)</option>
       <option value="celular">Celular</option>
+      <option value="electronicos">Electrónicos (por kg)</option>
+      <option value="documentos">Documentos (hasta 250 gr)</option>
+      <option value="medicamentos">Medicamentos (hasta 500 gr)</option>
+      <option value="tv">Televisor (por kg)</option>
     `;
   } else {
     options = `
-      <option value="caja_s">Caja S (30x30x30)</option>
-      <option value="caja_m">Caja M (40x30x30)</option>
-      <option value="caja_l">Caja L (50x30x30)</option>
-      <option value="caja_xl">Caja XL (60x40x40)</option>
+      <option value="caja_s">Caja S (30×30×30)</option>
+      <option value="caja_m">Caja M (40×30×30)</option>
+      <option value="caja_l">Caja L (50×30×30)</option>
+      <option value="caja_xl">Caja XL (60×40×40)</option>
+      <option value="caja_xg">Caja XG (70×40×40)</option>
+      <option value="caja_xxl">Caja XXL (60×50×50)</option>
     `;
   }
   
