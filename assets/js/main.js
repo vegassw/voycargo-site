@@ -131,61 +131,168 @@ function initMobileMenu() {
 }
 
 // ================================
-// PRICING SECTION
+// PRICING SECTION - PREMIUM DESIGN
 // ================================
 function initPricing() {
   const regionBtns = document.querySelectorAll('.region-btn');
+  const serviceTypeBtns = document.querySelectorAll('.service-type-btn');
   
   // Initial render
-  renderPricing('metropolitana');
+  renderPricing('santiago', 'aereo');
   
   // Region button clicks
   regionBtns.forEach(btn => {
     btn.addEventListener('click', function() {
       const region = this.dataset.region;
-      
-      // Update active button
       regionBtns.forEach(b => b.classList.remove('active'));
       this.classList.add('active');
       
-      // Render new pricing
-      renderPricing(region);
+      const activeService = document.querySelector('.service-type-btn.active')?.dataset.service || 'aereo';
+      renderPricing(region, activeService);
+    });
+  });
+  
+  // Service type button clicks
+  serviceTypeBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const service = this.dataset.service;
+      serviceTypeBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      const activeRegion = document.querySelector('.region-btn.active')?.dataset.region || 'santiago';
+      renderPricing(activeRegion, service);
     });
   });
 }
 
-function renderPricing(regionKey) {
+function getItemIcon(iconType) {
+  const icons = {
+    phone: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>`,
+    laptop: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg>`,
+    doc: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>`,
+    med: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>`,
+    tv: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>`
+  };
+  return icons[iconType] || '';
+}
+
+function renderPricing(regionKey, serviceType) {
   const data = preciosData[regionKey];
   if (!data) return;
   
-  const pricingGrid = document.getElementById('pricingGrid');
-  const combosList = document.getElementById('combosList');
+  const pricingContent = document.getElementById('pricingContent');
   
-  // Render pricing cards
-  pricingGrid.innerHTML = data.tarifas.map(tarifa => `
-    <div class="pricing-card">
-      <div class="pricing-card-header">
-        <div class="pricing-card-icon ${tarifa.icon}">${tarifa.emoji}</div>
-        <h3 class="pricing-card-title">${tarifa.titulo}</h3>
+  if (serviceType === 'aereo') {
+    const aereo = data.aereo;
+    pricingContent.innerHTML = `
+      <div class="pricing-premium-container animate-fade-in">
+        <div class="pricing-hero-card">
+          <div class="pricing-hero-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 16v-2a4 4 0 0 0-4-4h-2l-3.5-5H8l1.5 5H6L4.5 8H2l1 4-1 4h2.5L6 14h3.5L8 19h3.5l3.5-5h2a4 4 0 0 0 4-4v-2"/>
+            </svg>
+          </div>
+          <h3 class="pricing-hero-title">${aereo.titulo}</h3>
+          <p class="pricing-hero-subtitle">${data.region}</p>
+          <div class="pricing-hero-badge">Entrega: 3-5 días</div>
+        </div>
+        
+        <div class="pricing-rates-section">
+          <h4 class="rates-title">
+            <span class="rates-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </span>
+            Tarifas por Kilogramo
+          </h4>
+          <div class="rates-grid">
+            ${aereo.porKilo.map((item, idx) => `
+              <div class="rate-card ${idx === 0 ? 'featured' : ''}" style="animation-delay: ${idx * 0.1}s">
+                <span class="rate-label">${item.label}</span>
+                <span class="rate-price">${item.price}</span>
+                ${item.perKg ? '<span class="rate-unit">por kg</span>' : ''}
+              </div>
+            `).join('')}
+          </div>
+        </div>
+        
+        <div class="pricing-specials-section">
+          <h4 class="rates-title">
+            <span class="rates-icon special">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </span>
+            Envíos Especiales
+          </h4>
+          <div class="specials-grid">
+            ${aereo.especiales.map((item, idx) => `
+              <div class="special-card" style="animation-delay: ${idx * 0.08}s">
+                <div class="special-icon">${getItemIcon(item.icon)}</div>
+                <div class="special-info">
+                  <span class="special-label">${item.label}</span>
+                  ${item.subtitle ? `<span class="special-subtitle">${item.subtitle}</span>` : ''}
+                </div>
+                <span class="special-price">${item.price}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
       </div>
-      <ul class="pricing-list">
-        ${tarifa.items.map(item => `
-          <li>
-            <span>${item.label}</span>
-            <span class="price">${item.price}</span>
-          </li>
-        `).join('')}
-      </ul>
-    </div>
-  `).join('');
-  
-  // Render combos
-  combosList.innerHTML = data.combos.map(combo => `
-    <li>
-      <span>${combo.label}</span>
-      <span class="combo-price">${combo.price}</span>
-    </li>
-  `).join('');
+    `;
+  } else {
+    const maritimo = data.maritimo;
+    pricingContent.innerHTML = `
+      <div class="pricing-premium-container animate-fade-in">
+        <div class="pricing-hero-card maritimo">
+          <div class="pricing-hero-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 20a6 6 0 0 1 6-6h8a6 6 0 0 1 6 6"/>
+              <path d="M12 14V4"/>
+              <path d="M12 4l4 4"/>
+              <path d="M12 4L8 8"/>
+            </svg>
+          </div>
+          <h3 class="pricing-hero-title">${maritimo.titulo}</h3>
+          <p class="pricing-hero-subtitle">${data.region}</p>
+          <div class="pricing-hero-badge maritimo">Entrega: 15-25 días</div>
+        </div>
+        
+        <div class="pricing-boxes-section">
+          <h4 class="rates-title">
+            <span class="rates-icon box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            </span>
+            Cajas Individuales
+          </h4>
+          <div class="boxes-grid">
+            ${maritimo.cajas.map((item, idx) => `
+              <div class="box-card" style="animation-delay: ${idx * 0.08}s">
+                <div class="box-size">${item.size}</div>
+                <div class="box-dimensions">${item.dimensions}</div>
+                <div class="box-price">${item.price}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+        
+        <div class="pricing-combos-section">
+          <h4 class="rates-title">
+            <span class="rates-icon promo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+            </span>
+            Promociones (2 Cajas)
+          </h4>
+          <div class="combos-grid">
+            ${maritimo.combos.map((item, idx) => `
+              <div class="combo-card" style="animation-delay: ${idx * 0.08}s">
+                <div class="combo-name">${item.combo}</div>
+                <div class="combo-price">${item.price}</div>
+                <div class="combo-savings">${item.savings}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+  }
 }
 
 // ================================
