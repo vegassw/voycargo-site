@@ -3,94 +3,80 @@
    ======================================== */
 
 // ================================
-// PRICING DATA
+// PRICING DATA - UPDATED FEB 2026
 // ================================
 const preciosData = {
-  metropolitana: {
-    region: "la Región Metropolitana",
-    tarifas: [
-      {
-        icon: "air",
-        emoji: "✈️",
-        titulo: "Aéreo",
-        items: [
-          { label: "1 kg a 10 kg (por kilo)", price: "$14.990" },
-          { label: "10 kg a 25 kg (por kilo)", price: "$12.990" },
-          { label: "25 kg o más (por kilo)", price: "$11.990" },
-          { label: "Electrónico", price: "$18.000" },
-          { label: "Teléfono", price: "$18.990 + imp." },
-          { label: "Documentos", price: "$12.990" },
-          { label: "Medicamento", price: "$12.990" }
-        ]
-      },
-      {
-        icon: "sea",
-        emoji: "🚢",
-        titulo: "Marítimo",
-        items: [
-          { label: "Caja M (40x30x30)", price: "$58.500" },
-          { label: "Caja L (50x30x30)", price: "$72.000" },
-          { label: "Caja XL (60x40x40)", price: "$153.000" },
-          { label: "Caja XXL (60x50x50)", price: "$238.500" },
-          { label: "Caja BOX (78x40x40)", price: "$258.000" }
-        ]
-      },
-      {
-        icon: "express",
-        emoji: "⚡",
-        titulo: "Marítimo Express",
-        items: [
-          { label: "Caja S (30x30x30, 3.5 kg)", price: "$48.965" },
-          { label: "Caja M (40x30x30, 5 kg)", price: "$95.000" },
-          { label: "Caja L (50x30x30, 10 kg)", price: "$135.000" },
-          { label: "Caja XL (60x40x40, 15 kg)", price: "$195.000" },
-          { label: "Caja XXL (60x50x50, 20 kg)", price: "$260.000" }
-        ]
-      }
-    ],
-    combos: [
-      { label: "M + M", price: "$99.990" },
-      { label: "L + L", price: "$127.000" },
-      { label: "XL + XL", price: "$280.000" },
-      { label: "XG + XG", price: "$399.990" },
-      { label: "XXL + XXL", price: "$455.000" }
-    ]
+  santiago: {
+    region: "Santiago (Región Metropolitana)",
+    aereo: {
+      titulo: "Envíos Aéreos",
+      porKilo: [
+        { label: "1 hasta 10 kg", price: "$13.990", perKg: true },
+        { label: "10 kg hasta 25 kg", price: "$11.990", perKg: true },
+        { label: "25 kg en adelante", price: "$10.990", perKg: true }
+      ],
+      especiales: [
+        { label: "Celulares", price: "$15.990", icon: "phone" },
+        { label: "Electrónicos", price: "$15.990 c/k", icon: "laptop" },
+        { label: "Documentos", price: "$12.990", subtitle: "hasta 250 gr", icon: "doc" },
+        { label: "Medicamentos", price: "$12.990", subtitle: "hasta 500 gr", icon: "med" },
+        { label: "Televisores", price: "$11.990 c/k", icon: "tv" }
+      ]
+    },
+    maritimo: {
+      titulo: "Marítimo Tradicional",
+      cajas: [
+        { size: "S", dimensions: "30×30×30", price: "$44.990" },
+        { size: "M", dimensions: "40×30×30", price: "$54.990" },
+        { size: "L", dimensions: "50×30×30", price: "$67.990" },
+        { size: "XL", dimensions: "60×40×40", price: "$142.990" },
+        { size: "XG", dimensions: "70×40×40", price: "$162.990" },
+        { size: "XXL", dimensions: "60×50×50", price: "$225.990" }
+      ],
+      combos: [
+        { combo: "S + S", price: "$85.990", savings: "Ahorra $3.990" },
+        { combo: "M + M", price: "$105.990", savings: "Ahorra $3.990" },
+        { combo: "L + L", price: "$129.990", savings: "Ahorra $5.990" },
+        { combo: "XL + XL", price: "$279.990", savings: "Ahorra $5.990" },
+        { combo: "XG + XG", price: "$319.990", savings: "Ahorra $5.990" },
+        { combo: "XXL + XXL", price: "$444.990", savings: "Ahorra $6.990" }
+      ]
+    }
   },
   concepcion: {
-    region: "la Región del Biobío (Concepción)",
-    tarifas: [
-      {
-        icon: "air",
-        emoji: "✈️",
-        titulo: "Aéreo",
-        items: [
-          { label: "1 kg a 25 kg (por kilo)", price: "$16.990" },
-          { label: "Más de 25 kg (por kilo)", price: "$14.990" },
-          { label: "Documentos", price: "$16.990" },
-          { label: "Electrónicos", price: "$18.990" },
-          { label: "Celular", price: "$24.990" }
-        ]
-      },
-      {
-        icon: "sea",
-        emoji: "🚢",
-        titulo: "Marítimo Convencional",
-        items: [
-          { label: "Caja M (40x30x30)", price: "$76.000" },
-          { label: "Caja L (50x30x30)", price: "$89.990" },
-          { label: "Caja XL (60x40x40)", price: "$169.990" },
-          { label: "Caja XG (70x40x40)", price: "$213.925" },
-          { label: "Caja XXL (60x50x50)", price: "$253.000" }
-        ]
-      }
-    ],
-    combos: [
-      { label: "M + M", price: "$114.000" },
-      { label: "L + L", price: "$142.000" },
-      { label: "XL + XL", price: "$295.000" },
-      { label: "XG + XG", price: "$414.990" },
-      { label: "XXL + XXL", price: "$470.000" }
-    ]
+    region: "Concepción (Región del Biobío)",
+    aereo: {
+      titulo: "Envíos Aéreos",
+      porKilo: [
+        { label: "Cada kilogramo", price: "$15.990", perKg: true }
+      ],
+      especiales: [
+        { label: "Celulares", price: "$18.990", icon: "phone" },
+        { label: "Electrónicos", price: "$17.990 c/k", icon: "laptop" },
+        { label: "Documentos", price: "$14.990", subtitle: "hasta 250 gr", icon: "doc" },
+        { label: "Medicamentos", price: "$12.990", subtitle: "hasta 500 gr", icon: "med" },
+        { label: "Televisores", price: "$13.990 c/k", icon: "tv" }
+      ]
+    },
+    maritimo: {
+      titulo: "Marítimo Tradicional",
+      cajas: [
+        { size: "S", dimensions: "30×30×30", price: "$56.990" },
+        { size: "M", dimensions: "40×30×30", price: "$66.990" },
+        { size: "L", dimensions: "50×30×30", price: "$79.990" },
+        { size: "XL", dimensions: "60×40×40", price: "$154.990" },
+        { size: "XG", dimensions: "70×40×40", price: "$174.990" },
+        { size: "XXL", dimensions: "60×50×50", price: "$237.990" }
+      ],
+      combos: [
+        { combo: "S + S", price: "$104.990", savings: "Ahorra $8.990" },
+        { combo: "M + M", price: "$124.990", savings: "Ahorra $8.990" },
+        { combo: "L + L", price: "$150.990", savings: "Ahorra $8.990" },
+        { combo: "XL + XL", price: "$300.990", savings: "Ahorra $8.990" },
+        { combo: "XG + XG", price: "$340.990", savings: "Ahorra $8.990" },
+        { combo: "XXL + XXL", price: "$470.990", savings: "Ahorra $4.990" }
+      ]
+    }
   }
 };
 
