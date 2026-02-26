@@ -376,7 +376,7 @@ function calculateQuote() {
     if (cargo === 'medicamentos') price = 12990;
     if (cargo === 'tv') price = 11990 * Math.ceil(weight);
     
-    estimate = '3 a 5 días hábiles';
+    estimate = '8 a 12 días hábiles';
   }
   
   if (service === 'maritimo') {
@@ -386,7 +386,7 @@ function calculateQuote() {
     if (cargo === 'caja_xl') price = 142990;
     if (cargo === 'caja_xg') price = 162990;
     if (cargo === 'caja_xxl') price = 225990;
-    estimate = '15 a 25 días hábiles';
+    estimate = '45 a 60 días hábiles';
   }
   
   // Format service name
