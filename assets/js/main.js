@@ -194,7 +194,7 @@ function renderPricing(regionKey, serviceType) {
           </div>
           <h3 class="pricing-hero-title">${aereo.titulo}</h3>
           <p class="pricing-hero-subtitle">${data.region}</p>
-          <div class="pricing-hero-badge">Entrega: 3-5 días</div>
+          <div class="pricing-hero-badge">Entrega: 8-12 días</div>
         </div>
         
         <div class="pricing-rates-section">
@@ -252,7 +252,7 @@ function renderPricing(regionKey, serviceType) {
           </div>
           <h3 class="pricing-hero-title">${maritimo.titulo}</h3>
           <p class="pricing-hero-subtitle">${data.region}</p>
-          <div class="pricing-hero-badge maritimo">Entrega: 15-25 días</div>
+          <div class="pricing-hero-badge maritimo">Entrega: 45-60 días</div>
         </div>
         
         <div class="pricing-boxes-section">
