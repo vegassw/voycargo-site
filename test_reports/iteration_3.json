@@ -1,0 +1,44 @@
+{
+  "summary": "Completed comprehensive testing of VoyCargo tracking feature integration with real API. All 11 test scenarios passed successfully.",
+  "backend_issues": {
+    "critical_bugs": [],
+    "flaky_endpoints": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "Input normalization: '13' → 'VOY00013'",
+    "Input normalization: 'voy13' → 'VOY13'",
+    "Successful search for VOY00013 returns result with current status",
+    "404 error for INVALID999 shows friendly error message 'Orden no encontrada'",
+    "Query parameter ?orden=VOY00013 auto-executes search on page load",
+    "'Buscar otra orden' button clears result and input field",
+    "Loading state displays spinner while API call is in progress",
+    "Order number displayed in orange color #E67332 (rgb(230, 115, 50))",
+    "Status badge shows dynamic color from API response",
+    "Date formatted in Chilean Spanish locale (e.g., '14 mar 2026, 04:25 p. m.')",
+    "Responsive design works correctly on mobile (390x844 viewport)",
+    "Timeline displays empty state message when no history available",
+    "All UI elements (input, button, card, badge, timeline) render correctly",
+    "Error handling provides user-friendly messages with order number",
+    "'Intentar de nuevo' button works on error state"
+  ],
+  "test_report_links": [
+    ".screenshots/tracking_error_404.png",
+    ".screenshots/tracking_query_param.png",
+    ".screenshots/tracking_mobile.png",
+    ".screenshots/tracking_detailed.png"
+  ],
+  "action_item_for_main_agent": "",
+  "updated_files": [],
+  "success_percentage": {
+    "frontend": "100%",
+    "backend": "N/A (external API)",
+    "integration": "100%"
+  },
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_test_itself": false
+}

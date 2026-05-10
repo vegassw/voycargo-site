@@ -176,17 +176,23 @@
         <div class="tracking-form-wrapper">
           <form class="tracking-form" id="trackingForm" onsubmit="trackPackage(event)">
             <div class="tracking-input-group">
-              <input type="text" id="trackingNumber" placeholder="Ingresa tu código de rastreo" required>
-              <button type="submit" class="btn btn-primary">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <input type="text" id="trackingNumber" placeholder="Ej: VOY00013 o solo 13" required>
+              <button type="submit" class="btn btn-primary" id="trackingBtn">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <circle cx="11" cy="11" r="8"/>
                   <path d="M21 21l-4.35-4.35"/>
                 </svg>
-                Rastrear
+                <svg class="btn-spinner hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" stroke-dasharray="32" stroke-linecap="round"/>
+                </svg>
+                <span class="btn-text">Rastrear</span>
               </button>
             </div>
           </form>
-          <p class="tracking-help">¿No tienes tu código? <a href="https://wa.me/56978419619" target="_blank">Contáctanos por WhatsApp</a></p>
+          <p class="tracking-help" id="trackingHelp">¿No tienes tu código? <a href="https://wa.me/56978419619" target="_blank">Contáctanos por WhatsApp</a></p>
+          
+          <!-- Tracking Result Container -->
+          <div id="trackingResult" class="tracking-result-container"></div>
         </div>
       </div>
     </div>

@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initPricing();
   initQuoteForm();
   initSmoothScroll();
+  initTracking();
 });
 
 // ================================
@@ -486,43 +487,279 @@ function initSmoothScroll() {
 }
 
 // ================================
-// TRACKING FUNCTIONALITY
+// TRACKING FUNCTIONALITY - REAL API
 // ================================
-function trackPackage(e) {
+const TRACKING_API_URL = 'https://voycargo-api-1099445735275.southamerica-east1.run.app/api/public/track';
+
+// Initialize tracking on page load
+function initTracking() {
+  // Check for query param ?orden=
+  const urlParams = new URLSearchParams(window.location.search);
+  const ordenParam = urlParams.get('orden');
+  
+  if (ordenParam) {
+    const input = document.getElementById('trackingNumber');
+    input.value = ordenParam;
+    // Auto-execute search
+    trackPackage(new Event('submit'));
+  }
+  
+  // Allow Enter key to submit
+  document.getElementById('trackingNumber').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      trackPackage(e);
+    }
+  });
+}
+
+// Normalize order number: "13" -> "VOY00013", "voy13" -> "VOY13"
+function normalizeOrderNumber(input) {
+  let normalized = input.trim().toUpperCase();
+  
+  // If only digits, prefix with VOY and pad
+  if (/^\d+$/.test(normalized)) {
+    normalized = 'VOY' + normalized.padStart(5, '0');
+  }
+  
+  // If doesn't start with VOY, add it
+  if (!normalized.startsWith('VOY')) {
+    normalized = 'VOY' + normalized;
+  }
+  
+  return normalized;
+}
+
+// Format date to Chilean locale
+function formatDateCL(isoString) {
+  const date = new Date(isoString);
+  return new Intl.DateTimeFormat('es-CL', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  }).format(date);
+}
+
+// Format relative time (e.g., "hace 2 horas")
+function formatRelativeTime(isoString) {
+  const date = new Date(isoString);
+  const now = new Date();
+  const diffMs = now - date;
+  const diffMins = Math.floor(diffMs / 60000);
+  const diffHours = Math.floor(diffMs / 3600000);
+  const diffDays = Math.floor(diffMs / 86400000);
+  
+  if (diffMins < 1) return 'hace un momento';
+  if (diffMins < 60) return `hace ${diffMins} minuto${diffMins > 1 ? 's' : ''}`;
+  if (diffHours < 24) return `hace ${diffHours} hora${diffHours > 1 ? 's' : ''}`;
+  if (diffDays < 30) return `hace ${diffDays} día${diffDays > 1 ? 's' : ''}`;
+  return formatDateCL(isoString);
+}
+
+// Set loading state
+function setTrackingLoading(isLoading) {
+  const btn = document.getElementById('trackingBtn');
+  const icon = btn.querySelector('.btn-icon');
+  const spinner = btn.querySelector('.btn-spinner');
+  const text = btn.querySelector('.btn-text');
+  const input = document.getElementById('trackingNumber');
+  
+  if (isLoading) {
+    btn.disabled = true;
+    input.disabled = true;
+    icon.classList.add('hidden');
+    spinner.classList.remove('hidden');
+    text.textContent = 'Buscando...';
+  } else {
+    btn.disabled = false;
+    input.disabled = false;
+    icon.classList.remove('hidden');
+    spinner.classList.add('hidden');
+    text.textContent = 'Rastrear';
+  }
+}
+
+// Render timeline
+function renderTimeline(history) {
+  if (!history || history.length === 0) {
+    return `
+      <div class="timeline-empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+        <p>Tu envío está en preparación. Pronto verás más actualizaciones aquí.</p>
+      </div>
+    `;
+  }
+  
+  // Sort chronologically (oldest first, newest last)
+  const sorted = [...history].sort((a, b) => new Date(a.changed_at) - new Date(b.changed_at));
+  
+  const items = sorted.map((item, index) => {
+    const isLast = index === sorted.length - 1;
+    const delay = index * 80;
+    
+    return `
+      <div class="timeline-item ${isLast ? 'timeline-item-current' : ''}" style="animation-delay: ${delay}ms">
+        <div class="timeline-marker" style="background-color: ${item.state_color}"></div>
+        <div class="timeline-content">
+          <h4 class="timeline-state">${item.state_name}</h4>
+          <span class="timeline-date">${formatDateCL(item.changed_at)}</span>
+          ${item.observation ? `<p class="timeline-observation">"${item.observation}"</p>` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  return `<div class="tracking-timeline">${items}</div>`;
+}
+
+// Render tracking result card
+function renderTrackingResult(data) {
+  const { order_number, current_state, history } = data;
+  
+  return `
+    <div class="tracking-card animate-card">
+      <button class="tracking-card-close" onclick="clearTrackingResult()" aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+      
+      <div class="tracking-card-header">
+        <span class="tracking-card-label">N° DE ORDEN</span>
+        <h3 class="tracking-card-number">${order_number}</h3>
+        <div class="tracking-card-badge" style="background-color: ${current_state.color}">
+          ${current_state.name}
+        </div>
+        <span class="tracking-card-updated">Última actualización ${formatRelativeTime(current_state.since)}</span>
+      </div>
+      
+      <div class="tracking-card-body">
+        <h4 class="tracking-card-timeline-title">Historial de seguimiento</h4>
+        ${renderTimeline(history)}
+      </div>
+      
+      <div class="tracking-card-footer">
+        <button class="btn btn-outline" onclick="clearTrackingResult()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M21 21l-4.35-4.35"/>
+          </svg>
+          Buscar otra orden
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+// Render error message
+function renderTrackingError(type, orderNumber) {
+  const errors = {
+    notFound: {
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M15 9l-6 6M9 9l6 6"/>
+            </svg>`,
+      title: 'Orden no encontrada',
+      message: `No encontramos la orden <strong>${orderNumber}</strong>. Verifica el número e intenta nuevamente.`
+    },
+    network: {
+      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>`,
+      title: 'Error de conexión',
+      message: 'No pudimos contactar al servidor. Reintenta en unos segundos.'
+    }
+  };
+  
+  const error = errors[type];
+  
+  return `
+    <div class="tracking-error animate-card">
+      <div class="tracking-error-icon ${type}">${error.icon}</div>
+      <h4 class="tracking-error-title">${error.title}</h4>
+      <p class="tracking-error-message">${error.message}</p>
+      <button class="btn btn-primary" onclick="clearTrackingResult()">
+        Intentar de nuevo
+      </button>
+    </div>
+  `;
+}
+
+// Clear tracking result
+function clearTrackingResult() {
+  const resultContainer = document.getElementById('trackingResult');
+  resultContainer.innerHTML = '';
+  resultContainer.classList.remove('active');
+  document.getElementById('trackingNumber').value = '';
+  document.getElementById('trackingNumber').focus();
+  
+  // Clear URL param
+  const url = new URL(window.location);
+  url.searchParams.delete('orden');
+  window.history.replaceState({}, '', url);
+}
+
+// Main tracking function
+async function trackPackage(e) {
   e.preventDefault();
   
-  const trackingNumber = document.getElementById('trackingNumber').value.trim();
+  const input = document.getElementById('trackingNumber');
+  const rawValue = input.value.trim();
   
-  if (!trackingNumber) {
-    alert('Por favor ingresa un código de rastreo válido.');
+  if (!rawValue) {
+    input.focus();
     return;
   }
   
-  // Create or update result container
-  let resultContainer = document.querySelector('.tracking-result');
-  if (!resultContainer) {
-    resultContainer = document.createElement('div');
-    resultContainer.className = 'tracking-result';
-    document.querySelector('.tracking-form').after(resultContainer);
-  }
+  const orderNumber = normalizeOrderNumber(rawValue);
+  input.value = orderNumber; // Update input with normalized value
   
-  // Show loading state
+  const resultContainer = document.getElementById('trackingResult');
+  
+  // Update URL with order param
+  const url = new URL(window.location);
+  url.searchParams.set('orden', orderNumber);
+  window.history.replaceState({}, '', url);
+  
+  // Set loading state
+  setTrackingLoading(true);
   resultContainer.innerHTML = `
-    <h4>Buscando envío...</h4>
-    <p>Consultando el estado de tu paquete <strong>${trackingNumber}</strong></p>
+    <div class="tracking-loading">
+      <div class="tracking-loading-spinner"></div>
+      <p>Buscando orden <strong>${orderNumber}</strong>...</p>
+    </div>
   `;
+  resultContainer.classList.add('active');
   
-  // Simulate tracking lookup (in real implementation, this would call an API)
-  setTimeout(() => {
-    resultContainer.innerHTML = `
-      <h4>Código: ${trackingNumber}</h4>
-      <p>Para obtener información detallada sobre tu envío, contáctanos directamente:</p>
-      <a href="https://wa.me/56978419619?text=${encodeURIComponent('Hola 👋, quisiera rastrear mi envío con código: ' + trackingNumber)}" target="_blank" class="btn btn-whatsapp" style="margin-top: 12px;">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
-        Consultar por WhatsApp
-      </a>
-    `;
-  }, 1000);
+  try {
+    const response = await fetch(`${TRACKING_API_URL}/${orderNumber}`);
+    
+    if (response.status === 404) {
+      resultContainer.innerHTML = renderTrackingError('notFound', orderNumber);
+      return;
+    }
+    
+    if (!response.ok) {
+      throw new Error('Server error');
+    }
+    
+    const data = await response.json();
+    resultContainer.innerHTML = renderTrackingResult(data);
+    
+    // Scroll to result
+    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    
+  } catch (error) {
+    console.error('Tracking error:', error);
+    resultContainer.innerHTML = renderTrackingError('network', orderNumber);
+  } finally {
+    setTrackingLoading(false);
+  }
 }
